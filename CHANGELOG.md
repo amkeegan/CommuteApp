@@ -2,6 +2,16 @@
 
 ## **Week 5 (Deakin Week 12 / Study Week)**
 31 May - 05 Jun 2020
+### **Updated 05 June 2020**
++ **05 June 2020**
+    - Added Display Layouts, can be accessed from Main view by touching a card.
+    - Display fragment allows for OnBackPressed
+    - Reworked Layout XML files to include all UI elements for Display fragment in one file
++ **04 June 2020**
+    - Implemented SQLite storage for persistence - uses ROOM ORM
+    - Implemented Main Recycler View, cards generated from entries in DB
++ **03 June 2020**
+    - Reworked some existing Layout XML files
 ## **Week 4 (Deakin Week 11)**
 24-30 May 2020
 ## **Week 3 (Deakin Week 10)**
@@ -37,10 +47,3 @@
 + **03 May 2020 (Back dated)**  
     - Concept App sketches completed with OneNote.  
     - Sketch stored in Design/
-
-
-
-
-
-
-
