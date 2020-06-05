@@ -9,7 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -43,6 +48,7 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
     {
         thisContext = context;
         Log.d("COMMADAPT", "Adapter constructor");
+
     }
 
     @NonNull
@@ -67,11 +73,35 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
             holder.timeTextView.setText(currentCommute.getRouteTime());
             holder.arriveDepartTextView.setText(currentCommute.getRouteArriveDepart());
             Log.d("BINDVIEW", "thisCommutes != null");
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {handleCardClick(currentCommute);}
+            });
         }
         else
         {
             Log.d("BINDVIEW", "thisCommutes == null");
         }
+
+    }
+
+    void handleCardClick(CommuteDataClass commute)
+    {
+
+        FragmentManager fragmentManager = ((AppCompatActivity) thisContext).getSupportFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.main_fragment, new CardFragment(commute));
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        RecyclerView recyclerView = ((AppCompatActivity) thisContext).findViewById(R.id.main_recycler_view);
+        recyclerView.setVisibility(View.INVISIBLE); // Turn off visibility for MainActivity recyclerView
+
+        FloatingActionButton fab = ((AppCompatActivity) thisContext).findViewById(R.id.mainFAB);
+        fab.setVisibility(View.INVISIBLE);
+
     }
 
     void setCommutes(List<CommuteDataClass> commutes)
