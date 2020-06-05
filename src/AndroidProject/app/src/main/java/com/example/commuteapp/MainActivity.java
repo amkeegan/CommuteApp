@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         tmpCommute.setRouteQueryString("123.com");
 
-        commuteViewModel.insertCommute(tmpCommute);
-
+        //commuteViewModel.insertCommute(tmpCommute);
 
         commuteViewModel.getAllCommutes().observe(this, new Observer<List<CommuteDataClass>>() {
             @Override
