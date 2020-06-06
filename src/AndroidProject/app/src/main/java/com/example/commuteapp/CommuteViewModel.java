@@ -31,4 +31,9 @@ public class CommuteViewModel extends AndroidViewModel
         Log.d("VIEWMODEL","Inserting commute");
         repository.insertCommute(commute);
     }
+
+    public void updateCommute(CommuteDataClass commute)
+    {
+        repository.updateCommute(commute);
+    }
 }

@@ -8,7 +8,7 @@
     android:layout_marginBottom="16dp">
 
     <Button
-        android:id="@+id/btn6"
+        android:id="@+id/btnFriday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -16,11 +16,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="F"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn4"
-        app:layout_constraintStart_toEndOf="@+id/btn4" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnThursday"
+        app:layout_constraintStart_toEndOf="@+id/btnThursday" />
 
     <Button
-        android:id="@+id/btn4"
+        android:id="@+id/btnThursday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -28,11 +28,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="T"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn5"
-        app:layout_constraintStart_toEndOf="@+id/btn5" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnWednesday"
+        app:layout_constraintStart_toEndOf="@+id/btnWednesday" />
 
     <Button
-        android:id="@+id/btn8"
+        android:id="@+id/btnSaturday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -40,13 +40,13 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="S"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn6"
-        app:layout_constraintStart_toEndOf="@+id/btn6" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnFriday"
+        app:layout_constraintStart_toEndOf="@+id/btnFriday" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="395dp"
-        android:layout_height="193dp"
+        android:layout_width="392dp"
+        android:layout_height="224dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView" />
 
     <Button
-        android:id="@+id/btn5"
+        android:id="@+id/btnWednesday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -72,20 +72,22 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="w"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn3"
-        app:layout_constraintStart_toEndOf="@+id/btn3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnTuesday"
+        app:layout_constraintStart_toEndOf="@+id/btnTuesday" />
 
     <TextView
         android:id="@+id/main_textview_route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Route"
         app:layout_constraintBaseline_toBaselineOf="@+id/main_textview_to"
-        app:layout_constraintEnd_toEndOf="@+id/main_imageview_route"
-        app:layout_constraintStart_toStartOf="@+id/main_imageview_route" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/btnSaturday" />
 
     <Button
-        android:id="@+id/btn2"
+        android:id="@+id/btnMonday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -93,11 +95,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="M"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn"
-        app:layout_constraintStart_toEndOf="@+id/btn" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnSunday"
+        app:layout_constraintStart_toEndOf="@+id/btnSunday" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnSunday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -119,8 +121,10 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/btn8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnSaturday"
         app:layout_constraintTop_toBottomOf="@+id/main_textview_route"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -140,10 +144,10 @@
         android:layout_marginTop="16dp"
         android:text="Arrive by:"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/btn" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSunday" />
 
     <Button
-        android:id="@+id/btn3"
+        android:id="@+id/btnTuesday"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerInParent="true"
@@ -151,8 +155,8 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="T"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn2"
-        app:layout_constraintStart_toEndOf="@+id/btn2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnMonday"
+        app:layout_constraintStart_toEndOf="@+id/btnMonday" />
 
     <TextView
         android:id="@+id/main_textview_from"
@@ -174,5 +178,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.094"
         app:srcCompat="@drawable/ic_baseline_arrow_right_alt_24" />
+
+
+    <Button
+        android:id="@+id/button30"
+        android:layout_width="83dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/commute_reminder_rectangle"
+        android:text="30 minutes before"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_textview_arrivedepart" />
+
+    <Button
+        android:id="@+id/buttonAuto"
+        android:layout_width="133dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/commute_reminder_rectangle"
+        android:text="Connected to Auto"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button30" />
+
+    <Button
+        android:id="@+id/buttonBT"
+        android:layout_width="117dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/commute_reminder_rectangle"
+        android:text="Connected to BT"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAuto"
+        app:layout_constraintStart_toEndOf="@+id/buttonAuto" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="71dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/commute_reminder_rectangle"
+        android:text="5 minutes before"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button30"
+        app:layout_constraintStart_toEndOf="@+id/button30" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

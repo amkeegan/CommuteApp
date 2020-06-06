@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     CommuteViewModel commuteViewModel;
 
     CommuteDataClass tmpCommute = new CommuteDataClass(
-            "123","1234","456","1234",
-            "1234","1234","1234",
-            true,true,true,
-            true,true,true,true,
-            true,true,true,true);
+            "","","","",
+            "","","",
+            false,true,false,
+            false,false,false,false,
+            false,false,false,false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<CommuteDataClass> commutes) {
                 recyclerAdapter.setCommutes(commutes);
+                Log.d("ROOMDB", "MAIN onChanged");
             }
         });
-
-        FloatingActionButton mainFAB = findViewById(R.id.mainFAB);
-        mainFAB.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
-                // Switch to new view;
-            }
-        });
-        Log.d("MAINACT", "MAIN onCreate");
     }
 }

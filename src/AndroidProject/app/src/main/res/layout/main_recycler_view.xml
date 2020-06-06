@@ -20,6 +20,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginBottom="16dp"
+
         app:fabSize="auto"
         android:backgroundTint="#FFFFFF"
         android:src="@drawable/ic_baseline_add_circle_24"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button30"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -15,10 +15,10 @@
         android:background="@drawable/commute_reminder_rectangle"
         android:text="30 minutes before"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewReminder" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonAuto"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -26,30 +26,30 @@
         android:background="@drawable/commute_reminder_rectangle"
         android:text="Connected to Auto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button30" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonBT"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/commute_reminder_rectangle"
         android:text="Connected to BT"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/button3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAuto"
+        app:layout_constraintStart_toEndOf="@+id/buttonAuto" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonBack"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/commute_reminder_rectangle"
         android:text="5 minutes before"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/button30"
+        app:layout_constraintStart_toEndOf="@+id/button30" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

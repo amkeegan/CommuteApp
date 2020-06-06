@@ -53,6 +53,4 @@ public abstract class CommuteDatabase extends RoomDatabase
         }
         return INSTANCE;
     }
-
-
 }

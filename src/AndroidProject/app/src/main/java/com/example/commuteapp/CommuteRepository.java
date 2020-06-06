@@ -28,4 +28,14 @@ class CommuteRepository
     {
         CommuteDatabase.databaseWriteExecutor.execute(() -> commuteDAO.insertCommute(commute));
     }
+
+    void updateCommute(final CommuteDataClass commute)
+    {
+        CommuteDatabase.databaseWriteExecutor.execute(() -> commuteDAO.updateCommute(commute));
+    }
+
+    void deleteCommute(final CommuteDataClass commute)
+    {
+        CommuteDatabase.databaseWriteExecutor.execute(() -> commuteDAO.deleteCommute(commute));
+    }
 }

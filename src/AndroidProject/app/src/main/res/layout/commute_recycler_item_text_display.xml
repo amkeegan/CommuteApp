@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/CommuteReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -20,16 +20,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerArriveDepart"
         android:layout_width="337dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEndAlias" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinnerMode"
         android:layout_width="337dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextOrigAddr"
         android:layout_width="337dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -47,10 +47,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/CommuteReminder" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/editTextEndAlias"
         android:layout_width="337dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -59,10 +59,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDestAddr" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/editTextDestAddr"
         android:layout_width="337dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -71,10 +71,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextStartAlias" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/editTextStartAlias"
         android:layout_width="337dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -83,7 +83,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextOrigAddr" />
 
     <EditText
         android:id="@+id/editTextTime"
@@ -95,7 +95,7 @@
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerArriveDepart" />
 
 
     <TextView
@@ -106,10 +106,10 @@
         android:layout_marginTop="24dp"
         android:text="Schedule"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMode" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnSunday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -122,7 +122,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_commute_Schedule" />
 
     <Button
-        android:id="@+id/btn2"
+        android:id="@+id/btnMonday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -130,11 +130,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="M"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn"
-        app:layout_constraintStart_toEndOf="@+id/btn" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnSunday"
+        app:layout_constraintStart_toEndOf="@+id/btnSunday" />
 
     <Button
-        android:id="@+id/btn3"
+        android:id="@+id/btnTuesday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -142,11 +142,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="T"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn2"
-        app:layout_constraintStart_toEndOf="@+id/btn2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnMonday"
+        app:layout_constraintStart_toEndOf="@+id/btnMonday" />
 
     <Button
-        android:id="@+id/btn4"
+        android:id="@+id/btnThursday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -154,11 +154,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="T"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn5"
-        app:layout_constraintStart_toEndOf="@+id/btn5" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnWednesday"
+        app:layout_constraintStart_toEndOf="@+id/btnWednesday" />
 
     <Button
-        android:id="@+id/btn6"
+        android:id="@+id/btnFriday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -166,11 +166,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="F"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn4"
-        app:layout_constraintStart_toEndOf="@+id/btn4" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnThursday"
+        app:layout_constraintStart_toEndOf="@+id/btnThursday" />
 
     <Button
-        android:id="@+id/btn8"
+        android:id="@+id/btnSaturday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -178,11 +178,11 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="S"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn6"
-        app:layout_constraintStart_toEndOf="@+id/btn6" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnFriday"
+        app:layout_constraintStart_toEndOf="@+id/btnFriday" />
 
     <Button
-        android:id="@+id/btn5"
+        android:id="@+id/btnWednesday"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerInParent="true"
@@ -190,91 +190,110 @@
         android:background="@drawable/commute_schedule_circle"
         android:text="w"
         android:textColor="#fff"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn3"
-        app:layout_constraintStart_toEndOf="@+id/btn3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnTuesday"
+        app:layout_constraintStart_toEndOf="@+id/btnTuesday" />
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button30"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/commute_reminder_rectangle"
         android:text="30 minutes before"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewReminder" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonAuto"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/commute_reminder_rectangle"
         android:text="Connected to Auto"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button30" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonBT"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/commute_reminder_rectangle"
         android:text="Connected to BT"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button3"
-        app:layout_constraintStart_toEndOf="@+id/button3" />
+        android:textColor="#FFFFFF"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonAuto"
+        app:layout_constraintStart_toEndOf="@+id/buttonAuto" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button5"
         android:layout_width="175dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/commute_reminder_rectangle"
         android:text="5 minutes before"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        android:textColor="#FFFFFF"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button30"
+        app:layout_constraintStart_toEndOf="@+id/button30" />
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="Reminders"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSunday" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAuto"
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/buttonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
         android:text="Edit"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button5"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonBack"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/buttonRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="304dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="16dp"
         android:text="Route"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button6"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonEdit" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="#FF5959"
+        android:text="Delete Route"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEdit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
