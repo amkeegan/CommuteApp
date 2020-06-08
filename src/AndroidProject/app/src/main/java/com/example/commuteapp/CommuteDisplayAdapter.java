@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -128,7 +128,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
         }
         else
         {
-            holder.startAlias.setText(tmpAddr);
+            holder.startAlias.setText(tmpAlias);
         }
         tmpAlias = thisCommute.getToAlias();
         if(tmpAlias.equals(""))
@@ -137,7 +137,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
         }
         else
         {
-            holder.endAlias.setText(tmpAddr);
+            holder.endAlias.setText(tmpAlias);
         }
 
         ArrayList<String> arrayList = new ArrayList<>();
@@ -255,6 +255,9 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
 
                 CommuteRepository tmpRepo = new CommuteRepository(((AppCompatActivity) thisContext).getApplication());
 
+                thisCommute.setFromAddr(holder.origAddr.getText().toString());
+                thisCommute.setToAddr(holder.destAddr.getText().toString());
+
                 tmpRepo.updateCommute(thisCommute);
 
                 FragmentManager fragmentManager = ((AppCompatActivity) thisContext).getSupportFragmentManager();
@@ -277,6 +280,30 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
                 ((AppCompatActivity) thisContext).findViewById(R.id.main_recycler_view).setVisibility(View.VISIBLE);
 
                 ((AppCompatActivity) thisContext).findViewById(R.id.mainFAB).setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.controlRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CommuteRepository tmpRepo = new CommuteRepository(((AppCompatActivity) thisContext).getApplication());
+
+                thisCommute.setFromAddr(holder.origAddr.getText().toString());
+                thisCommute.setToAddr(holder.destAddr.getText().toString());
+
+                tmpRepo.updateCommute(thisCommute);
+
+                FragmentManager fragmentManager = ((AppCompatActivity) thisContext).getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.commute_fragment, new RouteFragment(thisContext, thisCommute));
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                RecyclerView recyclerView = ((AppCompatActivity) thisContext).findViewById(R.id.commute_recycler_view);
+                recyclerView.setVisibility(View.INVISIBLE); // Turn off visibility for MainActivity recyclerView
             }
         });
     }

@@ -96,8 +96,8 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
         if(thisCommutes != null)
         {
             CommuteDataClass currentCommute = thisCommutes.get(position);
-            holder.fromTextView.setText(currentCommute.getFromAddr());
-            holder.toTextView.setText(currentCommute.getToAddr());
+            holder.fromTextView.setText(currentCommute.getFromAlias());
+            holder.toTextView.setText(currentCommute.getToAlias());
             holder.timeTextView.setText(currentCommute.getRouteTime());
             holder.arriveDepartTextView.setText(currentCommute.getRouteArriveDepart());
 
@@ -109,9 +109,6 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
                 @Override
                 public void onClick(View v) {handleCardClick(currentCommute);}
             });
-
-
-
         }
         else
         {

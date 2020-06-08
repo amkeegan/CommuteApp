@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -23,13 +22,6 @@ import java.util.Objects;
 
 public class CardFragment extends Fragment
 {
-    CommuteDataClass tmpCommute = new CommuteDataClass(
-            "","","","",
-            "","","",
-            false,true,false,
-            false,false,false,false,
-            false,false,false,false);
-
     OnBackPressedCallback callback;
     CommuteDataClass thisCommute;
     Context thisContext;
@@ -68,6 +60,13 @@ public class CardFragment extends Fragment
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+                CommuteDataClass tmpCommute = new CommuteDataClass(
+                        "","","","",
+                        "","","",
+                        false,true,false,
+                        false,false,false,false,
+                        false,false,false,false);
+
                 fragmentTransaction.replace(R.id.main_fragment, new CardFragment(thisContext, tmpCommute));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
@@ -84,9 +83,9 @@ public class CardFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.commute_recycler_view, container, false);
+        View view = inflater.inflate(R.layout.commute_recycler_view_layout, container, false);
 
-        RecyclerView newsFragment_recycler = (RecyclerView) view.findViewById(R.id.commute_display_fragment);
+        RecyclerView newsFragment_recycler = (RecyclerView) view.findViewById(R.id.commute_recycler_view);
 
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
 

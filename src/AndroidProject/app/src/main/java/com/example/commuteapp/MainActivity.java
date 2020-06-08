@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     CommuteViewModel commuteViewModel;
 
     CommuteDataClass tmpCommute = new CommuteDataClass(
-            "","","","",
-            "","","",
-            false,true,false,
-            false,false,false,false,
-            false,false,false,false);
+            "25 Lonsdale St Braddon ACT 2612","Home","5 Isa St Fyshwick ACT 2609","Work",
+            "Car","7:00","Depart",
+            false,true,true,
+            true,true,true,false,
+            true,false,false,false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
