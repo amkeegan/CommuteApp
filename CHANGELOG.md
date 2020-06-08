@@ -1,5 +1,13 @@
 # CommuteApp Changelog
 
+## **Week 6 (Deakin Study Week)**
+08
++ GoogleMap and DirectionsApi implemented. Directions are generated from Data in Room Database, and corresponding PolyLine is added to Map on screen.
+
+06 June 2020
++ GoogleMap implmented in recycler view, currently only loads default map, with not markers.
+
+
 ## **Week 5 (Deakin Week 12 / Study Week)**
 31 May - 05 Jun 2020
 ### **Updated 05 June 2020**
