@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">CommuteApp</string>
-    <string name="APIKEY">APIKEY</string>
+    <string name="APIKEY"></string>
 </resources>

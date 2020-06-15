@@ -204,19 +204,19 @@ public class CommuteDataClass
 
     private Boolean reminderBT;
 
-    public String getRouteQueryString() {
-        return routeQueryString;
+    public String getRouteDirectionsString() {
+        return routeDirectionsString;
     }
 
-    public void setRouteQueryString(String routeQueryString) {
-        this.routeQueryString = routeQueryString;
+    public void setRouteDirectionsString(String routeDirectionsString) {
+        this.routeDirectionsString = routeDirectionsString;
     }
 
     public void setReminderBT(Boolean reminderBT) {
         this.reminderBT = reminderBT;
     }
 
-    private String routeQueryString;
+    private String routeDirectionsString;
 
     public int getSnoozeDelay() {
         return snoozeDelay;
@@ -227,6 +227,8 @@ public class CommuteDataClass
     }
 
     private int snoozeDelay;
+
+
 
     public CommuteDataClass(    @NonNull String FROM,
                                 String FROMALIAS,

@@ -5,16 +5,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         commuteViewModel = new ViewModelProvider(this).get(CommuteViewModel.class);
 
-        tmpCommute.setRouteQueryString("123.com");
+        //tmpCommute.setRouteDirectionsString("");
 
         //commuteViewModel.insertCommute(tmpCommute);
 

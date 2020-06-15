@@ -40,7 +40,12 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.TravelMode;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -96,23 +101,53 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.DisplayViewH
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        GeoApiContext geoApiContext = new GeoApiContext.Builder()
-                .apiKey(thisContext.getString(R.string.APIKEY))
-                .build();
-
         DirectionsResult directionsResult = null;
-        try
-        {
-            directionsResult = DirectionsApi.newRequest(geoApiContext)
-                    .mode(TravelMode.DRIVING)
-                    .origin(thisCommute.getFromAddr())
-                    .destination(thisCommute.getToAddr())
-                    .departureTimeNow()
-                    .await();
+        Boolean loadedFromDB = false;
 
-        } catch (ApiException | InterruptedException | IOException e) {
-            e.printStackTrace();
-            Log.d("ROUTEADAPT","directions error: " + e.toString());
+        // Check if routeDirectionsString exists
+        if(thisCommute.getRouteDirectionsString() != null)
+        {
+            // Load routeDirectionsString
+            byte[] byteData = Base64.getDecoder().decode(thisCommute.getRouteDirectionsString());
+            ObjectInputStream objectInputStream = null;
+            try {
+                objectInputStream = new ObjectInputStream(new ByteArrayInputStream(byteData));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                assert objectInputStream != null;
+                directionsResult = (DirectionsResult)objectInputStream.readObject();
+                loadedFromDB = true;
+                Log.d("ROUTEADAPT","directionsResults loaded from bytes");
+            } catch (ClassNotFoundException | IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                objectInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(directionsResult == null)
+        {
+            // Create new DirectionsAPI request
+            GeoApiContext geoApiContext = new GeoApiContext.Builder()
+                    .apiKey(thisContext.getString(R.string.APIKEY))
+                    .build();
+            try
+            {
+                directionsResult = DirectionsApi.newRequest(geoApiContext)
+                        .mode(TravelMode.DRIVING)
+                        .origin(thisCommute.getFromAddr())
+                        .destination(thisCommute.getToAddr())
+                        .departureTimeNow()
+                        .await();
+            } catch (ApiException | InterruptedException | IOException e) {
+                e.printStackTrace();
+                Log.d("ROUTEADAPT","directions error: " + e.toString());
+            }
+            Log.d("ROUTEADAPT","directionsResults newly created");
         }
 
         if(directionsResult == null)
@@ -130,6 +165,35 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.DisplayViewH
             Log.d("ROUTEATAPT","directions waypoints.length: " + directionsResult.geocodedWaypoints.length);
             Log.d("ROUTEATAPT","directions waypoints: " + directionsResult.geocodedWaypoints[0].toString());
 
+            if(!loadedFromDB)
+            {
+                // Serialise directionsResult into String
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                ObjectOutputStream objectOutputStream = null;
+                try {
+                    objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    assert objectOutputStream != null;
+                    objectOutputStream.writeObject(directionsResult);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    objectOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String tmpResult = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
+                if(tmpResult != null)
+                {
+                    // Store in Room
+                    thisCommute.setRouteDirectionsString(tmpResult);
+                    Log.d("ROUTEATAPT","Serialised string: " + tmpResult);
+                }
+            }
             List<LatLng> decodedPath = PolyUtil.decode(directionsResult.routes[0].overviewPolyline.getEncodedPath());
             thisGoogleMap.addPolyline(new PolylineOptions().addAll(decodedPath));
 
@@ -190,7 +254,6 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.DisplayViewH
 
             }
         });
-
     }
 
     @Override
