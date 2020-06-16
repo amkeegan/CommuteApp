@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">CommuteApp</string>
     <string name="APIKEY"></string>
+    <string name="channel_name">REGULAR</string>
+    <string name="channel_description">CommuteApp regular notifications</string>
+    <string name="channel_id">CommuteApp</string>
 </resources>

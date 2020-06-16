@@ -22,6 +22,9 @@ public interface CommuteDAO
     @Query("SELECT * from commute_data_table")
     LiveData<List<CommuteDataClass>> getAllCommutes();
 
+    @Query("SELECT * from commute_data_table WHERE id=:id")
+    CommuteDataClass getSingleCommute(int id);
+
     @Query("DELETE FROM commute_data_table")
     void deleteAll();
 

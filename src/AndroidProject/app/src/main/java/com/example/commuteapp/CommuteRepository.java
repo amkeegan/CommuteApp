@@ -24,6 +24,11 @@ class CommuteRepository
         return allCommutes;
     }
 
+    CommuteDataClass getSingleCommute(int id)
+    {
+        return (CommuteDataClass)commuteDAO.getSingleCommute(id);
+    }
+
     void insertCommute(final CommuteDataClass commute)
     {
         CommuteDatabase.databaseWriteExecutor.execute(() -> commuteDAO.insertCommute(commute));

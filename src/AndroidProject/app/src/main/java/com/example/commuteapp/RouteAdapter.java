@@ -20,6 +20,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,7 +76,6 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.DisplayViewH
             super(v);
             controlBack = v.findViewById(R.id.buttonBack);
             controlDone = v.findViewById(R.id.buttonSave);
-
 
             routeMap = v.findViewById(R.id.routeMap);
             if(routeMap == null)
@@ -241,6 +244,21 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.DisplayViewH
         holder.controlDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // calculate initial delay to next commute
+
+                // set scheduled work
+                WorkRequest scheduleCommuteRequest =
+                        new OneTimeWorkRequest.Builder(ScheduledCommuteWorker.class)
+                                .setInitialDelay(1, TimeUnit.MINUTES)
+                                .setInputData(
+                                        new Data.Builder()
+                                        .putInt("roomID", thisCommute.getId())
+                                        .build()
+                                )
+                                .build();
+                WorkManager.getInstance(thisContext).enqueue(scheduleCommuteRequest);
+
                 CommuteRepository tmpRepo = new CommuteRepository(((AppCompatActivity) thisContext).getApplication());
 
                 tmpRepo.insertCommute(thisCommute);
