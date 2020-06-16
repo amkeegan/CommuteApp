@@ -1,11 +1,15 @@
 # CommuteApp Changelog
 
+17 June 2020
++ Added application notifications (static, not indicative of app state)
++ Added framework for route comparison: loads stored route, makes Directions API call for new, current route. Currently simply inspects first StartAddress for comparison.
+
 15 June 2020
 + Routes displayed on GoogleMap prioritise reading from DB
 + DirectionAPI results are serialised and stored in Room DB
 
 ## **Week 6 (Deakin Study Week)**
-08
+08 June 2020
 + GoogleMap and DirectionsApi implemented. Directions are generated from Data in Room Database, and corresponding PolyLine is added to Map on screen.
 
 06 June 2020
