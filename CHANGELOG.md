@@ -1,5 +1,10 @@
 # CommuteApp Changelog
 
+18 June 2020
++ Added route comparison between stored route and newly created route. Route comparison (so far) just iterates through all steps (in the first, and only by default) leg and compares startDestination and endDestination.
++ Route detour is flagged as first step where endDestination does not match, or (for testing) where the first step does not match at all.
++ Schedule notifications now dynamically reflect route comparison, with contextual information such as "Turn left as Main St" "Commute will take 10 mins".
+
 17 June 2020
 + Added application notifications (static, not indicative of app state)
 + Added framework for route comparison: loads stored route, makes Directions API call for new, current route. Currently simply inspects first StartAddress for comparison.
@@ -14,7 +19,6 @@
 
 06 June 2020
 + GoogleMap implmented in recycler view, currently only loads default map, with not markers.
-
 
 ## **Week 5 (Deakin Week 12 / Study Week)**
 31 May - 05 Jun 2020
