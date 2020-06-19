@@ -31,11 +31,13 @@ public abstract class CommuteDatabase extends RoomDatabase
             databaseWriteExecutor.execute(() ->
             {
                 CommuteDAO dao = INSTANCE.commuteDAO();
-                //dao.deleteAll();
+                //dao.deleteAll(); // Uncomment to clear DB
             });
         }
     };
 
+    // Provide a method for retrieving a reference to the database.
+    // The reference returned is used with a DAO to perform operations on the DB
     static CommuteDatabase getDatabase(final Context context)
     {
         if(INSTANCE == null)

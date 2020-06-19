@@ -37,6 +37,7 @@ public class CardFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
 
+        // Allow back tracking to Main RecyclerView
         callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -49,13 +50,16 @@ public class CardFragment extends Fragment
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
 
-        FloatingActionButton mainFAB = getActivity().findViewById(R.id.mainFAB);
+        FloatingActionButton mainFAB = Objects.requireNonNull(getActivity()).findViewById(R.id.mainFAB);
         mainFAB.bringToFront();
         mainFAB.setOnClickListener(new FloatingActionButton.OnClickListener()
         {
+            // When Floating Action Button is clicked a new CommuteDataClass is created
+            //  (with temporary values) and passed to the CommuteDisplayAdapter
+            //  in the same way that if a Recycler item passes a CommuteDataClass from the DB to
+            //  the CommuteDisplayAdapter.
             public void onClick(View view)
             {
-                Log.d("FAB","got onClick");
                 FragmentManager fragmentManager = ((AppCompatActivity) thisContext).getSupportFragmentManager();
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -85,7 +89,7 @@ public class CardFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.commute_recycler_view_layout, container, false);
 
-        RecyclerView newsFragment_recycler = (RecyclerView) view.findViewById(R.id.commute_recycler_view);
+        RecyclerView fragmentRecycler = (RecyclerView) view.findViewById(R.id.commute_recycler_view);
 
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -93,9 +97,9 @@ public class CardFragment extends Fragment
 
         view.setFocusable(true);
 
-        newsFragment_recycler.setLayoutManager(recyclerManager);
-        newsFragment_recycler.setAdapter(recyclerAdapter);
-        newsFragment_recycler.setHasFixedSize(true);
+        fragmentRecycler.setLayoutManager(recyclerManager);
+        fragmentRecycler.setAdapter(recyclerAdapter);
+        fragmentRecycler.setHasFixedSize(true);
 
         return view;
     }

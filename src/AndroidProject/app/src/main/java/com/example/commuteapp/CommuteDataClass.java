@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+// Class represents an entity within the Room Database, in the table specified.
 @Entity(tableName = "commute_data_table")
 public class CommuteDataClass
 {
@@ -15,6 +16,7 @@ public class CommuteDataClass
         this.id = id;
     }
 
+    // Deliberate exposure of primary key, is used in application to refer to this entity
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -227,8 +229,6 @@ public class CommuteDataClass
     }
 
     private int snoozeDelay;
-
-
 
     public CommuteDataClass(    @NonNull String FROM,
                                 String FROMALIAS,

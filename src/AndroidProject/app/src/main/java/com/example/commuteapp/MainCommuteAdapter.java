@@ -46,7 +46,6 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
         Button reminderBT;
         Button reminderAuto;
 
-
         MainCommuteViewHolder(View v)
         {
             super(v);
@@ -68,15 +67,12 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
             reminderBT = v.findViewById(R.id.buttonBT);
             reminderAuto = v.findViewById(R.id.buttonAuto);
 
-            Log.d("COMMVIEW", "ViewHolder constructor");
         }
     }
 
     MainCommuteAdapter(Context context)
     {
         thisContext = context;
-        Log.d("COMMADAPT", "Adapter constructor");
-
     }
 
     @NonNull
@@ -86,44 +82,38 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
         final Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View mainCommuteView = inflater.inflate(R.layout.main_recycler_item, parent, false);
-        Log.d("CREATEVIEW", "Adapter onCreateViewHolder");
         return new MainCommuteViewHolder(mainCommuteView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MainCommuteViewHolder holder, final int position)
     {
-        if(thisCommutes != null)
+        if(thisCommutes != null) // Ensure data has loaded from the DB
         {
+            // Each item in RecyclerView is represented by a instance from the DB
             CommuteDataClass currentCommute = thisCommutes.get(position);
             holder.fromTextView.setText(currentCommute.getFromAlias());
             holder.toTextView.setText(currentCommute.getToAlias());
             holder.timeTextView.setText(currentCommute.getRouteTime());
             holder.arriveDepartTextView.setText(currentCommute.getRouteArriveDepart());
 
+            // Read the CommuteDataClass and set button views
             setScheduleButtons(holder, currentCommute);
-
             setReminderButtons(holder, currentCommute);
 
+            // Action when user touches the item.
             holder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {handleCardClick(currentCommute);}
             });
         }
-        else
-        {
-            Log.d("BINDVIEW", "thisCommutes == null");
-        }
-
     }
 
     void handleCardClick(CommuteDataClass commute)
     {
-
+        // Replace this view with the new view with FragmentTransaction.
         FragmentManager fragmentManager = ((AppCompatActivity) thisContext).getSupportFragmentManager();
-
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         fragmentTransaction.replace(R.id.main_fragment, new CardFragment(thisContext, commute));
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -131,6 +121,7 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
         RecyclerView recyclerView = ((AppCompatActivity) thisContext).findViewById(R.id.main_recycler_view);
         recyclerView.setVisibility(View.INVISIBLE); // Turn off visibility for MainActivity recyclerView
 
+        // Disable/hide the FAB
         FloatingActionButton fab = ((AppCompatActivity) thisContext).findViewById(R.id.mainFAB);
         fab.setVisibility(View.INVISIBLE);
     }
@@ -146,25 +137,26 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
     {
         if(thisCommutes != null)
         {
-            Log.d("ITEMCOUNT", "thisCommutes size: " + thisCommutes.size());
             return thisCommutes.size();
         }
         else
         {
-            Log.d("ITEMCOUNT", "thisCommutes == null; returning 0");
             return 0;
         }
     }
 
     private void setReminderButtons(MainCommuteViewHolder holder, CommuteDataClass commute)
     {
-        if(commute.getReminder30())
+        // Check each variable in the CommuteDataClass
+        if(commute.getReminder30()) // If selected
         {
+            // Display 'ON' scheme
             holder.reminder30.setBackgroundResource(R.drawable.commute_reminder_rectangle);
             holder.reminder30.setTextColor(Color.WHITE);
         }
-        else
+        else // If not selected
         {
+            // Display 'OFF' scheme
             holder.reminder30.setBackgroundResource(R.drawable.commute_reminder_rectangle_off);
             holder.reminder30.setTextColor(Color.BLACK);
         }
@@ -202,12 +194,15 @@ public class MainCommuteAdapter extends RecyclerView.Adapter<MainCommuteAdapter.
 
     private void setScheduleButtons(MainCommuteViewHolder holder, CommuteDataClass commute)
     {
-        if(commute.getSunday())
+        // Check each variable in the CommuteDataClass
+        if(commute.getSunday()) // If selected
         {
+            // Set 'ON' scheme
             holder.sunday.setBackgroundResource(R.drawable.commute_schedule_circle);
         }
-        else
+        else // If not selected
         {
+            // Set 'OFF' scheme
             holder.sunday.setBackgroundResource(R.drawable.commute_schedule_cirle_off);
         }
         if(commute.getMonday())

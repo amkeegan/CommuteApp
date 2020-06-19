@@ -25,8 +25,6 @@ public class RouteFragment extends Fragment
     CommuteDataClass thisCommute;
     Context thisContext;
 
-
-
     public RouteFragment(Context context, CommuteDataClass commute)
     {
         thisContext = context;
@@ -38,6 +36,7 @@ public class RouteFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
 
+        // Handle OS back functionality and return to previous View
         callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -47,26 +46,18 @@ public class RouteFragment extends Fragment
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this,callback);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.route_recycler_view_layout, container, false);
-
-        RecyclerView newsFragment_recycler = (RecyclerView) view.findViewById(R.id.route_recycler_view);
-
+        RecyclerView fragmentRecycler = (RecyclerView) view.findViewById(R.id.route_recycler_view);
         RecyclerView.LayoutManager recyclerManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
-
         RecyclerView.Adapter recyclerAdapter = new RouteAdapter(thisCommute, view.getContext(), savedInstanceState);
-
-        newsFragment_recycler.setLayoutManager(recyclerManager);
-        newsFragment_recycler.setAdapter(recyclerAdapter);
-        newsFragment_recycler.setHasFixedSize(true);
-
-
+        fragmentRecycler.setLayoutManager(recyclerManager);
+        fragmentRecycler.setAdapter(recyclerAdapter);
+        fragmentRecycler.setHasFixedSize(true);
         return view;
     }
-
 }

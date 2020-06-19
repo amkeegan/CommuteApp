@@ -29,7 +29,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
     CommuteDataClass thisCommute;
     Context thisContext;
 
-    boolean inEditMode = false;
+    boolean inEditMode = false; // Used to unlock all User input fields
 
     static class DisplayViewHolder extends  RecyclerView.ViewHolder
     {
@@ -103,6 +103,9 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
     @Override
     public void onBindViewHolder(final DisplayViewHolder holder, final int position)
     {
+        // Update User input fields with data from the CommuteDataClass object (if present).
+
+        // For some fields, if no data is present a hint can be displayed.
         String tmpAddr = thisCommute.getFromAddr();
         if(tmpAddr.equals(""))
         {
@@ -140,6 +143,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             holder.endAlias.setText(tmpAlias);
         }
 
+        // Create the options for the Spinner object.
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Car");
         arrayList.add("Public Transport");
@@ -148,6 +152,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.mode.setAdapter(arrayAdapter);
 
+        // If present, set the Transport Mode option
         String tmpMode = thisCommute.getTransportMode();
         if(tmpMode.equals(""))
         {
@@ -170,6 +175,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             holder.mode.setSelection(0); // Need to handle incorrect type
         }
 
+        // Same as previous Spinner object, create the options.
         ArrayList<String> arrayList2 = new ArrayList<>();
         arrayList2.add("Arrive By");
         arrayList2.add("Depart After");
@@ -177,6 +183,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
         arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.arriveDepart.setAdapter(arrayAdapter2);
 
+        // Set the values for the Spinner
         String tmpArriveDepart = thisCommute.getRouteArriveDepart();
         if(tmpArriveDepart.equals(""))
         {
@@ -195,6 +202,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             holder.arriveDepart.setSelection(0); // Need to handle incorrect type
         }
 
+        // Implement a more user friendly method of setting the time with this TimePickerDialog widget.
         holder.time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,6 +216,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
                     mTimePicker = new TimePickerDialog(thisContext, new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            // TODO: Fix time display (does not handle minutes = 0, displays x:0, not x:00.
                             holder.time.setText( selectedHour + ":" + selectedMinute);
                         }
                     }, hour, minute, true);
@@ -227,11 +236,14 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             holder.time.setText(tmpTime);
         }
 
+        // Read the CommuteDataClass and set button views
         setScheduleButtons(holder);
-
         setReminderButtons(holder);
 
+        // Ensure User cannot initially change fields, until Edit is pressed.
         toggleEdit(holder, false); // Initially set to false
+
+        // Edit button used to unlock editing for input fields
         holder.controlEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,20 +256,27 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
                 else
                 {
                     // Nothing, user must proceed to Route, or Back
-                    // Back will throw changes.
+                    // Back will save changes.
+                    // TODO: improve Usability, it is not clear to User what each action achieves
                     // Route will attempt to process changes.
                 }
             }
         });
+
+        // Back button used to backtrack to main RecyclerView
         holder.controlBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // Get a reference to the Database
                 CommuteRepository tmpRepo = new CommuteRepository(((AppCompatActivity) thisContext).getApplication());
 
+                // Extract any updated fields and update the CommuteDataClass object
+                // TODO: implement extraction for all user input fields
                 thisCommute.setFromAddr(holder.origAddr.getText().toString());
                 thisCommute.setToAddr(holder.destAddr.getText().toString());
 
+                // Update the database with this entity (to save any changes).
                 tmpRepo.updateCommute(thisCommute);
 
                 FragmentManager fragmentManager = ((AppCompatActivity) thisContext).getSupportFragmentManager();
@@ -268,6 +287,9 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
                 ((AppCompatActivity) thisContext).findViewById(R.id.mainFAB).setVisibility(View.VISIBLE);
             }
         });
+
+        // Delete button removes the current CommuteDataClass from the database and returns the user
+        //  to the main RecyclerView
         holder.controlDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,12 +305,14 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             }
         });
 
+        // Route button saves the user input and changes view to where the route is calculated / presented.
         holder.controlRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 CommuteRepository tmpRepo = new CommuteRepository(((AppCompatActivity) thisContext).getApplication());
 
+                // TODO: implement field extraction for all fields
                 thisCommute.setFromAddr(holder.origAddr.getText().toString());
                 thisCommute.setToAddr(holder.destAddr.getText().toString());
 
@@ -310,13 +334,16 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
 
     private void setReminderButtons(DisplayViewHolder holder)
     {
-        if(thisCommute.getReminder30())
+        // Each field in the CommuteDataClass object is checked and used to toggle the displayed layout
+        if(thisCommute.getReminder30()) // If selected
         {
+            // Display the 'ON' scheme
             holder.reminder30.setBackgroundResource(R.drawable.commute_reminder_rectangle);
             holder.reminder30.setTextColor(Color.WHITE);
         }
-        else
+        else // If not selected
         {
+            // Display the 'OFF' scheme
             holder.reminder30.setBackgroundResource(R.drawable.commute_reminder_rectangle_off);
             holder.reminder30.setTextColor(Color.BLACK);
         }
@@ -351,6 +378,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             holder.reminderAuto.setTextColor(Color.BLACK);
         }
 
+        // Each button needs a listener to allow for toggling the layout and updating the CommuteDataClass entity.
         holder.reminder30.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -522,17 +550,11 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
             if(!turnOn)
             {
                 button.setBackgroundResource(R.drawable.commute_schedule_circle);
-                Log.d("COMMAD","toggleSchedulebutton button ON");
             }
             else
             {
                 button.setBackgroundResource(R.drawable.commute_schedule_cirle_off);
-                Log.d("COMMAD","toggleSchedulebutton button OFF");
             }
-        }
-        else
-        {
-            Log.d("COMMAD","toggleSchedulebutton, not in edit mode");
         }
     }
 
@@ -560,6 +582,7 @@ public class CommuteDisplayAdapter extends RecyclerView.Adapter<CommuteDisplayAd
         }
     }
 
+    // Needed as it is shown in a RecyclerView however only one view is ever inflated.
     @Override
     public int getItemCount() {return 1;}
 }

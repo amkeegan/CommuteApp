@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     CommuteViewModel commuteViewModel;
 
+    // For testing / demonstration purposes.
+    //  This object can be inserted into the database to populate the RecyclerView and provide
+    //  quick access to modifying and testing features.
     CommuteDataClass tmpCommute = new CommuteDataClass(
             "25 Lonsdale St Braddon ACT 2612","Home","5 Isa St Fyshwick ACT 2609","Work",
             "Car","7:00","Depart",
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Create a new notification channel
+        //  Although this is called regularly, even after config changes it is acceptable
+        //  as the OS handles duplicate calls. i.e. will not overwrite/modify existing channel
+        //  with same details.
         createNotificationChannel();
 
         setContentView(R.layout.main_recycler_view);
@@ -55,37 +62,38 @@ public class MainActivity extends AppCompatActivity {
 
         commuteViewModel = new ViewModelProvider(this).get(CommuteViewModel.class);
 
-        //tmpCommute.setRouteDirectionsString("");
-
-        //commuteViewModel.insertCommute(tmpCommute);
+        // Used for testing / demonstration purposes
+        //  Inserts the temporary CommuteDataClass object into the database.
+        //  Comment this line once desired number of objects are stored, otherwise a new object
+        //  is stored during every onCreate
+        commuteViewModel.insertCommute(tmpCommute); // Ensure there's always a valid route (for demo only)
 
         commuteViewModel.getAllCommutes().observe(this, new Observer<List<CommuteDataClass>>() {
             @Override
             public void onChanged(List<CommuteDataClass> commutes) {
                 recyclerAdapter.setCommutes(commutes);
-                Log.d("ROOMDB", "MAIN onChanged");
             }
         });
     }
 
     private void createNotificationChannel()
     {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            String CHANNEL_ID = getString(R.string.channel_id);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            channel.setLockscreenVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-            notificationManager.cancelAll();
-        }
+        // Get some application specific values for this Channel
+        CharSequence name = getString(R.string.channel_name);
+        String description = getString(R.string.channel_description);
+        String CHANNEL_ID = getString(R.string.channel_id);
+
+        // Set the importance. Different levels affects how the user will see the notification
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+
+        channel.setDescription(description);
+        channel.setLockscreenVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        assert notificationManager != null;
+        notificationManager.createNotificationChannel(channel);
+        notificationManager.cancelAll();
     }
 }
