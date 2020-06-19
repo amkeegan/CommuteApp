@@ -1,5 +1,11 @@
 # CommuteApp Changelog
 
+## Week 7
+
+19 June 2020
++ Added source code comments to all relevant files. 
++ Tidied up code to remove most debug Log.d messages.
+
 18 June 2020
 + Added route comparison between stored route and newly created route. Route comparison (so far) just iterates through all steps (in the first, and only by default) leg and compares startDestination and endDestination.
 + Route detour is flagged as first step where endDestination does not match, or (for testing) where the first step does not match at all.
